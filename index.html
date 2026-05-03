@@ -1,0 +1,2164 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Odoo ERP — دليل التحضير للمقابلة</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ============ THEME TOKENS ============ */
+      :root {
+        --bg: #ffffff;
+        --bg-soft: #f7f9fc;
+        --bg-elev: #ffffff;
+        --border: #e6e8ee;
+        --border-strong: #d3d7e0;
+        --text: #0f1729;
+        --text-muted: #5a6577;
+        --text-subtle: #8993a4;
+        --accent: #714b67;
+        --accent-2: #00a09d;
+        --accent-soft: #f1ebf0;
+        --accent-soft-2: #e6f5f4;
+        --warning: #d97706;
+        --success: #059669;
+        --shadow-sm:
+          0 1px 2px rgba(15, 23, 41, 0.04), 0 1px 3px rgba(15, 23, 41, 0.06);
+        --shadow-md:
+          0 4px 12px rgba(15, 23, 41, 0.06), 0 2px 4px rgba(15, 23, 41, 0.04);
+        --shadow-lg:
+          0 12px 32px rgba(15, 23, 41, 0.08), 0 4px 8px rgba(15, 23, 41, 0.04);
+        --radius-sm: 6px;
+        --radius-md: 10px;
+        --radius-lg: 14px;
+        --radius-xl: 20px;
+      }
+      [data-theme="dark"] {
+        --bg: #0b1020;
+        --bg-soft: #0f152a;
+        --bg-elev: #131a31;
+        --border: #1f2940;
+        --border-strong: #2a3656;
+        --text: #e7ecf6;
+        --text-muted: #a6b0c5;
+        --text-subtle: #7c8aa8;
+        --accent: #b48bb0;
+        --accent-2: #4dd6d2;
+        --accent-soft: #1c1828;
+        --accent-soft-2: #0f2627;
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+        --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.45);
+        --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        font-family:
+          "Cairo", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.75;
+        -webkit-font-smoothing: antialiased;
+        transition:
+          background 0.25s ease,
+          color 0.25s ease;
+      }
+      code,
+      pre,
+      [lang="en"] {
+        font-family:
+          "Inter", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
+          sans-serif;
+      }
+      /* English concept terms inside Arabic prose: keep LTR direction & Latin font */
+      [lang="en"] {
+        font-family:
+          "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        unicode-bidi: isolate;
+        direction: ltr;
+      }
+
+      /* ============ LAYOUT ============ */
+      .app {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        min-height: 100vh;
+      }
+
+      /* ============ SIDEBAR ============ */
+      .sidebar {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        border-inline-end: 1px solid var(--border);
+        background: var(--bg-soft);
+        padding: 24px 18px;
+        overflow-y: auto;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 28px;
+        padding: 4px 8px;
+      }
+      .brand-mark {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        display: grid;
+        place-items: center;
+        color: #fff;
+        font-weight: 800;
+        box-shadow: var(--shadow-md);
+        font-size: 16px;
+      }
+      .brand-text {
+        display: flex;
+        flex-direction: column;
+      }
+      .brand-name {
+        font-weight: 700;
+        font-size: 15px;
+        letter-spacing: -0.01em;
+      }
+      .brand-sub {
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+
+      .nav-search {
+        position: relative;
+        margin-bottom: 18px;
+      }
+      .nav-search input {
+        width: 100%;
+        padding-block: 9px;
+        padding-inline-start: 34px;
+        padding-inline-end: 12px;
+        background: var(--bg-elev);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        color: var(--text);
+        font-size: 13px;
+        font-family: inherit;
+        transition:
+          border-color 0.15s,
+          box-shadow 0.15s;
+      }
+      .nav-search input:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px var(--accent-soft);
+      }
+      .nav-search svg {
+        position: absolute;
+        inset-inline-start: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-subtle);
+      }
+
+      .nav-group {
+        margin-bottom: 18px;
+      }
+      .nav-group-title {
+        text-transform: uppercase;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        color: var(--text-subtle);
+        font-weight: 700;
+        padding: 0 10px;
+        margin: 8px 0 6px;
+      }
+      .nav a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 10px;
+        border-radius: 8px;
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 13.5px;
+        font-weight: 500;
+        transition:
+          background 0.15s,
+          color 0.15s,
+          transform 0.1s;
+      }
+      .nav a:hover {
+        background: var(--accent-soft);
+        color: var(--text);
+      }
+      .nav a.active {
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-weight: 600;
+      }
+      .nav a .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--border-strong);
+        flex-shrink: 0;
+      }
+      .nav a.active .dot {
+        background: var(--accent);
+      }
+
+      .sidebar-footer {
+        margin-top: 24px;
+        padding-top: 16px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      .theme-toggle {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: var(--bg-elev);
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+        padding: 8px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 500;
+        transition: all 0.15s;
+      }
+      .theme-toggle:hover {
+        color: var(--text);
+        border-color: var(--border-strong);
+      }
+
+      /* ============ MAIN CONTENT ============ */
+      .main {
+        padding: 0;
+        max-width: 100%;
+        min-width: 0;
+      }
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: saturate(180%) blur(10px);
+        -webkit-backdrop-filter: saturate(180%) blur(10px);
+        border-bottom: 1px solid var(--border);
+        padding: 14px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      [data-theme="dark"] .topbar {
+        background: rgba(11, 16, 32, 0.85);
+      }
+      .breadcrumb {
+        color: var(--text-muted);
+        font-size: 13px;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .breadcrumb b {
+        color: var(--text);
+        font-weight: 700;
+      }
+      .topbar-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-shrink: 0;
+      }
+      .badge-live {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--accent-soft-2);
+        color: var(--accent-2);
+        padding: 4px 10px;
+        border-radius: 99px;
+        font-size: 11.5px;
+        font-weight: 700;
+      }
+      .badge-live::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent-2);
+        box-shadow: 0 0 0 0 rgba(0, 160, 157, 0.6);
+        animation: pulse 1.8s infinite;
+      }
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(0, 160, 157, 0.5);
+        }
+        70% {
+          box-shadow: 0 0 0 8px rgba(0, 160, 157, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(0, 160, 157, 0);
+        }
+      }
+
+      .content {
+        padding: 40px 56px 80px;
+        max-width: 980px;
+      }
+
+      /* ============ HERO ============ */
+      .hero {
+        margin-bottom: 48px;
+      }
+      .hero-eyebrow {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 0.04em;
+        background: var(--accent-soft);
+        padding: 4px 12px;
+        border-radius: 99px;
+        margin-bottom: 14px;
+      }
+      .hero h1 {
+        font-size: clamp(26px, 4.5vw, 44px);
+        line-height: 1.25;
+        letter-spacing: -0.02em;
+        font-weight: 800;
+        margin: 0 0 14px;
+        background: linear-gradient(135deg, var(--text) 60%, var(--accent));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .hero p.lead {
+        font-size: 16.5px;
+        color: var(--text-muted);
+        max-width: 720px;
+        margin: 0 0 24px;
+      }
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 12px;
+        margin-top: 24px;
+      }
+      .stat {
+        background: var(--bg-elev);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        padding: 14px 16px;
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s,
+          border-color 0.15s;
+      }
+      .stat:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--border-strong);
+      }
+      .stat-value {
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: var(--text);
+      }
+      .stat-label {
+        font-size: 12.5px;
+        color: var(--text-muted);
+        margin-top: 2px;
+      }
+
+      /* ============ SECTIONS ============ */
+      section {
+        scroll-margin-top: 80px;
+        padding: 28px 0;
+        border-top: 1px solid var(--border);
+      }
+      section:first-of-type {
+        border-top: none;
+      }
+      section h2 {
+        font-size: clamp(20px, 3.2vw, 26px);
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        margin: 0 0 8px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      section h2 .num {
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 13px;
+        font-weight: 700;
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+      }
+      section h3 {
+        font-size: 17px;
+        font-weight: 700;
+        margin: 24px 0 8px;
+        letter-spacing: -0.01em;
+      }
+      section p {
+        color: var(--text-muted);
+        margin: 8px 0;
+      }
+      section ul {
+        color: var(--text-muted);
+        padding-inline-start: 22px;
+      }
+      section ul li {
+        margin: 4px 0;
+      }
+
+      /* ============ CARDS GRID ============ */
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 14px;
+        margin: 18px 0;
+      }
+      .card {
+        background: var(--bg-elev);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 18px;
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s,
+          border-color 0.15s;
+        cursor: default;
+      }
+      .card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--accent);
+      }
+      .card-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        background: var(--accent-soft);
+        color: var(--accent);
+        margin-bottom: 12px;
+        font-size: 18px;
+      }
+      .card.alt .card-icon {
+        background: var(--accent-soft-2);
+        color: var(--accent-2);
+      }
+      .card h4 {
+        margin: 0 0 6px;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text);
+      }
+      .card p {
+        margin: 0;
+        font-size: 13.5px;
+        color: var(--text-muted);
+        line-height: 1.7;
+      }
+
+      /* ============ TABS ============ */
+      .tabs {
+        background: var(--bg-elev);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        margin: 18px 0;
+      }
+      .tab-list {
+        display: flex;
+        overflow-x: auto;
+        border-bottom: 1px solid var(--border);
+        background: var(--bg-soft);
+        scrollbar-width: thin;
+      }
+      .tab-btn {
+        padding: 12px 18px;
+        border: none;
+        background: transparent;
+        color: var(--text-muted);
+        font-family: inherit;
+        font-size: 13.5px;
+        font-weight: 500;
+        cursor: pointer;
+        white-space: nowrap;
+        border-bottom: 2px solid transparent;
+        transition:
+          color 0.15s,
+          border-color 0.15s,
+          background 0.15s;
+      }
+      .tab-btn:hover {
+        color: var(--text);
+      }
+      .tab-btn.active {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+        background: var(--bg-elev);
+        font-weight: 700;
+      }
+      .tab-panel {
+        display: none;
+        padding: 22px;
+      }
+      .tab-panel.active {
+        display: block;
+        animation: fadeIn 0.25s ease;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(4px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .tab-panel h4 {
+        margin: 0 0 8px;
+        font-size: 16px;
+        font-weight: 700;
+      }
+      .tab-panel p {
+        margin: 6px 0 12px;
+      }
+      .kv {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        gap: 10px 18px;
+        margin-top: 10px;
+      }
+      .kv dt {
+        color: var(--text-subtle);
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .kv dd {
+        margin: 0;
+        font-size: 13.5px;
+        color: var(--text);
+      }
+
+      /* ============ ACCORDION ============ */
+      .accordion {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 18px 0;
+      }
+      .accordion details {
+        background: var(--bg-elev);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        transition:
+          border-color 0.15s,
+          box-shadow 0.15s;
+      }
+      .accordion details:hover {
+        border-color: var(--border-strong);
+      }
+      .accordion details[open] {
+        border-color: var(--accent);
+        box-shadow: var(--shadow-sm);
+      }
+      .accordion summary {
+        cursor: pointer;
+        list-style: none;
+        padding: 14px 18px;
+        font-weight: 700;
+        font-size: 14.5px;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .accordion summary::-webkit-details-marker {
+        display: none;
+      }
+      .accordion summary .q-num {
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 6px;
+        flex-shrink: 0;
+      }
+      .accordion summary .q-text {
+        flex: 1;
+      }
+      .accordion summary .chev {
+        transition: transform 0.2s;
+        color: var(--text-subtle);
+        flex-shrink: 0;
+      }
+      .accordion details[open] summary .chev {
+        transform: rotate(180deg);
+        color: var(--accent);
+      }
+      .accordion .answer {
+        padding: 14px 18px 16px;
+        color: var(--text-muted);
+        font-size: 14px;
+        border-top: 1px dashed var(--border);
+        line-height: 1.85;
+      }
+
+      /* ============ WORKFLOW STEPS ============ */
+      .workflow {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 0;
+        margin: 22px 0;
+        background: var(--bg-elev);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 4px;
+      }
+      .step {
+        padding: 18px;
+        position: relative;
+        border-radius: var(--radius-md);
+        transition: background 0.15s;
+      }
+      .step:hover {
+        background: var(--accent-soft);
+      }
+      .step-num {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--accent);
+        color: white;
+        font-weight: 700;
+        font-size: 13px;
+        display: grid;
+        place-items: center;
+        margin-bottom: 10px;
+      }
+      .step h4 {
+        margin: 0 0 4px;
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .step p {
+        margin: 0;
+        font-size: 13px;
+        color: var(--text-muted);
+        line-height: 1.65;
+      }
+      .step::after {
+        content: "→";
+        position: absolute;
+        inset-inline-end: -8px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--border-strong);
+        font-size: 18px;
+        font-weight: 700;
+      }
+      [dir="rtl"] .step::after {
+        content: "←";
+      }
+      .step:last-child::after {
+        display: none;
+      }
+      @media (max-width: 768px) {
+        .step::after {
+          display: none;
+        }
+      }
+
+      /* ============ CALLOUTS ============ */
+      .callout {
+        border-inline-start: 3px solid var(--accent);
+        background: var(--accent-soft);
+        padding: 14px 18px;
+        border-radius: var(--radius-md);
+        margin: 16px 0;
+        font-size: 14px;
+        color: var(--text);
+        line-height: 1.8;
+      }
+      .callout.tip {
+        border-color: var(--accent-2);
+        background: var(--accent-soft-2);
+      }
+      .callout.warn {
+        border-color: var(--warning);
+        background: rgba(217, 119, 6, 0.08);
+      }
+      .callout strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 12.5px;
+        letter-spacing: 0.03em;
+        font-weight: 700;
+      }
+
+      /* ============ FOOTER ============ */
+      .footer {
+        margin-top: 40px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
+        color: var(--text-subtle);
+        font-size: 12.5px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      /* ============ RESPONSIVE ============ */
+      .menu-toggle {
+        display: none;
+        background: var(--bg-elev);
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 6px 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-family: inherit;
+      }
+      @media (max-width: 920px) {
+        .app {
+          grid-template-columns: 1fr;
+        }
+        .sidebar {
+          position: fixed;
+          top: 0;
+          inset-inline-start: 0;
+          width: min(280px, 86vw);
+          z-index: 50;
+          transform: translateX(-100%);
+          transition: transform 0.25s ease;
+          box-shadow: var(--shadow-lg);
+        }
+        [dir="rtl"] .sidebar {
+          transform: translateX(100%);
+        }
+        .sidebar.open,
+        [dir="rtl"] .sidebar.open {
+          transform: translateX(0);
+        }
+        .menu-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+        }
+        .topbar {
+          padding: 12px 20px;
+        }
+        .content {
+          padding: 28px 20px 60px;
+        }
+      }
+      @media (max-width: 640px) {
+        .content {
+          padding: 20px 16px 50px;
+        }
+        .topbar {
+          padding: 10px 16px;
+        }
+        .breadcrumb {
+          display: none;
+        }
+        .hero {
+          margin-bottom: 32px;
+        }
+        .hero-stats {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .stat {
+          padding: 12px 14px;
+        }
+        .stat-value {
+          font-size: 18px;
+        }
+        section h2 .num {
+          width: 24px;
+          height: 24px;
+          font-size: 12px;
+        }
+        .tab-btn {
+          padding: 10px 14px;
+          font-size: 13px;
+        }
+        .tab-panel {
+          padding: 16px;
+        }
+        .accordion summary {
+          padding: 12px 14px;
+          font-size: 14px;
+          gap: 8px;
+        }
+        .accordion .answer {
+          padding: 12px 14px 14px;
+        }
+      }
+      @media (max-width: 480px) {
+        .kv {
+          grid-template-columns: 1fr;
+          gap: 4px 0;
+        }
+        .footer {
+          flex-direction: column;
+        }
+      }
+
+      /* ============ Sidebar overlay ============ */
+      .overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 40;
+      }
+      .overlay.show {
+        display: block;
+      }
+
+      /* ============ tags ============ */
+      .tag {
+        display: inline-block;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 11.5px;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 99px;
+        margin-inline-start: 6px;
+      }
+      .tag.alt {
+        background: var(--accent-soft-2);
+        color: var(--accent-2);
+      }
+
+      /* hide search input no-result rows */
+      .nav a.hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body data-theme="light">
+    <div class="app">
+      <!-- =========== SIDEBAR =========== -->
+      <aside class="sidebar" id="sidebar">
+        <div class="brand">
+          <div class="brand-mark">O</div>
+          <div class="brand-text">
+            <span class="brand-name"><span lang="en">Odoo Docs</span></span>
+            <span class="brand-sub">إعداد المقابلة · v1</span>
+          </div>
+        </div>
+
+        <div class="nav-search">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+          <input type="text" id="navSearch" placeholder="ابحث في المواضيع…" />
+        </div>
+
+        <nav class="nav">
+          <div class="nav-group">
+            <div class="nav-group-title">البداية</div>
+            <a href="#intro" class="active">
+              <span class="dot"></span>ما هو <span lang="en">Odoo ERP</span>؟
+            </a>
+            <a href="#architecture">
+              <span class="dot"></span>البنية التقنية
+            </a>
+          </div>
+
+          <div class="nav-group">
+            <div class="nav-group-title">
+              وحدة <span lang="en">Accounting</span>
+            </div>
+            <a href="#accounting">
+              <span class="dot"></span>المفاهيم الأساسية
+            </a>
+            <a href="#workflow">
+              <span class="dot"></span>سير عمل
+              <span lang="en">Accounting</span>
+            </a>
+            <a href="#features">
+              <span class="dot"></span>الميزات الوظيفية
+            </a>
+          </div>
+
+          <div class="nav-group">
+            <div class="nav-group-title">إعداد المقابلة</div>
+            <a href="#qa"><span class="dot"></span>الأسئلة والأجوبة</a>
+          </div>
+        </nav>
+
+        <div class="sidebar-footer">
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            aria-label="تبديل الوضع الداكن"
+          >
+            <svg
+              id="iconSun"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+              />
+            </svg>
+            <span id="themeLabel">الوضع الداكن</span>
+          </button>
+        </div>
+      </aside>
+
+      <div class="overlay" id="overlay"></div>
+
+      <!-- =========== MAIN =========== -->
+      <main class="main">
+        <div class="topbar">
+          <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
+            <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+              >
+                <path d="M3 6h18M3 12h18M3 18h18" />
+              </svg>
+              القائمة
+            </button>
+            <div class="breadcrumb">
+              التوثيق /
+              <b><span lang="en">Odoo ERP</span> — دليل المقابلة</b>
+            </div>
+          </div>
+          <div class="topbar-actions">
+            <span class="badge-live">جاهز للمقابلة</span>
+          </div>
+        </div>
+
+        <div class="content">
+          <!-- =========== HERO =========== -->
+          <header class="hero">
+            <span class="hero-eyebrow">حديث · معياري · مُعدّ للمقابلات</span>
+            <h1>
+              الدليل المختصر إلى <span lang="en">Odoo ERP</span> و
+              <span lang="en">Accounting</span>.
+            </h1>
+            <p class="lead">
+              جولة مركّزة وعالية المستوى في
+              <span lang="en">Odoo</span>، أُعدّت خصيصًا للتحضير للمقابلات.
+              تصفّح المفاهيم، أتقن سير العمل المحاسبي، وراجع أكثر الأسئلة
+              شيوعًا — كل ذلك في صفحة واحدة.
+            </p>
+
+            <div class="hero-stats">
+              <div class="stat">
+                <div class="stat-value">6</div>
+                <div class="stat-label">أقسام رئيسية</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value">15</div>
+                <div class="stat-label">بطاقة سؤال وجواب</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value">5</div>
+                <div class="stat-label">خطوات سير العمل</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value">∞</div>
+                <div class="stat-label">
+                  وحدة في <span lang="en">Odoo</span>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <!-- =========== 1. INTRO =========== -->
+          <section id="intro">
+            <h2>
+              <span class="num">1</span>ما هو
+              <span lang="en">Odoo ERP</span>؟
+            </h2>
+            <p>
+              <strong><span lang="en">Odoo</span></strong> هو منظومة
+              <span lang="en">Enterprise Resource Planning (ERP)</span>
+              مفتوحة المصدر وشاملة، تساعد الشركات على إدارة أعمالها بالكامل
+              من منصة واحدة — <span lang="en">Sales</span>،
+              <span lang="en">Accounting</span>،
+              <span lang="en">Inventory</span>،
+              <span lang="en">HR</span>،
+              <span lang="en">Manufacturing</span>، وغيرها. يعتمد على نهج
+              <em>معياري</em> (<span lang="en">modular</span>): تُثبَّت فقط
+              التطبيقات التي تحتاجها، وتتكامل فيما بينها بسلاسة منذ البداية.
+            </p>
+
+            <div class="cards">
+              <div class="card">
+                <div class="card-icon">⚡</div>
+                <h4><span lang="en">All-in-One Suite</span></h4>
+                <p>
+                  تحلّ محلّ أدوات منفصلة متعددة (<span lang="en">CRM</span>،
+                  <span lang="en">Accounting</span>،
+                  <span lang="en">Inventory</span>،
+                  <span lang="en">HR</span>) بنظام واحد موحَّد.
+                </p>
+              </div>
+              <div class="card alt">
+                <div class="card-icon">🧩</div>
+                <h4><span lang="en">Modular by Design</span></h4>
+                <p>
+                  ثبّت التطبيقات حسب نموّ شركتك. كل وحدة مستقلّة، لكنها
+                  متكاملة بالكامل مع الأخرى.
+                </p>
+              </div>
+              <div class="card">
+                <div class="card-icon">🌐</div>
+                <h4><span lang="en">Open Source</span></h4>
+                <p>
+                  نسخة <span lang="en">Community</span> مجانية؛ نسخة
+                  <span lang="en">Enterprise</span> تضيف ميزات متقدّمة، دعمًا،
+                  واستضافة.
+                </p>
+              </div>
+              <div class="card alt">
+                <div class="card-icon">💼</div>
+                <h4>لماذا تختاره الشركات</h4>
+                <p>
+                  تكلفة أقل، نشر سريع، قابلية تخصيص عالية، ويتدرّج من الأعمال
+                  الصغيرة إلى المؤسسات الكبيرة.
+                </p>
+              </div>
+            </div>
+
+            <div class="callout">
+              <strong>تعريف سريع</strong>
+              <span lang="en">Odoo</span> = مجموعة متكاملة من تطبيقات الأعمال
+              تتشارك قاعدة بيانات واحدة وواجهة مستخدم واحدة، مما يلغي الحاجة
+              إلى أنظمة معزولة.
+            </div>
+          </section>
+
+          <!-- =========== 2. ARCHITECTURE =========== -->
+          <section id="architecture">
+            <h2>
+              <span class="num">2</span>البنية التقنية لـ
+              <span lang="en">Odoo</span>
+            </h2>
+            <p>
+              بُني <span lang="en">Odoo</span> حول مفهوم
+              <strong><span lang="en">apps (modules)</span></strong>. كل وحدة
+              تغطّي مجالًا تجاريًا، وتتواصل الوحدات فيما بينها عبر قاعدة
+              بيانات مشتركة، فتنساب البيانات تلقائيًا عبر الشركة.
+            </p>
+
+            <h3>كيف تتفاعل الوحدات</h3>
+            <div class="cards">
+              <div class="card">
+                <div class="card-icon">🛒</div>
+                <h4><span lang="en">Sales</span></h4>
+                <p>
+                  عروض الأسعار وأوامر البيع. تأكيد الطلب يُنشئ
+                  <span lang="en">invoice</span> في
+                  <span lang="en">Accounting</span> وأمر تسليم في
+                  <span lang="en">Inventory</span>.
+                </p>
+              </div>
+              <div class="card alt">
+                <div class="card-icon">📦</div>
+                <h4><span lang="en">Inventory</span></h4>
+                <p>
+                  يتتبّع حركات المخزون. مرتبط بـ
+                  <span lang="en">Purchase</span>،
+                  <span lang="en">Sales</span>، و<span lang="en"
+                    >Manufacturing</span
+                  >.
+                </p>
+              </div>
+              <div class="card">
+                <div class="card-icon">💰</div>
+                <h4><span lang="en">Accounting</span></h4>
+                <p>
+                  العمود الفقري المالي. كل مستند تجاري ينطوي على مال يصل إلى
+                  هنا كقيد <span lang="en">journal entry</span>.
+                </p>
+              </div>
+              <div class="card alt">
+                <div class="card-icon">👥</div>
+                <h4><span lang="en">HR / Payroll</span></h4>
+                <p>
+                  الموظفون، العقود، الإجازات، كشوف الرواتب. تُرسَل قيود
+                  الرواتب إلى <span lang="en">Accounting</span>.
+                </p>
+              </div>
+              <div class="card">
+                <div class="card-icon">🏭</div>
+                <h4><span lang="en">Manufacturing</span></h4>
+                <p>
+                  <span lang="en">BOMs</span>، أوامر العمل، الإنتاج. تستهلك
+                  المخزون وتنتج بضائع تامة الصنع.
+                </p>
+              </div>
+              <div class="card alt">
+                <div class="card-icon">📞</div>
+                <h4><span lang="en">CRM</span></h4>
+                <p>
+                  <span lang="en">Leads</span> و
+                  <span lang="en">opportunities</span>. تحوّل الصفقات الناجحة
+                  إلى أوامر <span lang="en">Sales</span> تلقائيًا.
+                </p>
+              </div>
+            </div>
+
+            <div class="callout tip">
+              <strong>ملاحظة للمقابلة</strong>
+              اذكر أن <span lang="en">Odoo</span> يستخدم قاعدة بيانات واحدة
+              و<span lang="en">ORM</span> موحَّد، فبمجرد تأكيد عملية البيع
+              تظهر فاتورة <span lang="en">draft</span> في
+              <span lang="en">Accounting</span> وأمر تسليم في
+              <span lang="en">Inventory</span> — دون أي مزامنة يدوية.
+            </div>
+          </section>
+
+          <!-- =========== 3. ACCOUNTING CONCEPTS =========== -->
+          <section id="accounting">
+            <h2>
+              <span class="num">3</span>وحدة
+              <span lang="en">Accounting</span> — المفاهيم الأساسية
+            </h2>
+            <p>
+              وحدة <span lang="en">Accounting</span> هي قلب أي تنفيذ لـ
+              <span lang="en">Odoo</span>. فيما يلي المفاهيم السبعة التي يجب
+              أن يستطيع كل مرشّح شرحها بجملة أو جملتين.
+            </p>
+
+            <div class="tabs" id="accountingTabs">
+              <div class="tab-list" role="tablist">
+                <button class="tab-btn active" data-tab="coa">
+                  <span lang="en">Chart of Accounts</span>
+                </button>
+                <button class="tab-btn" data-tab="invoices">
+                  <span lang="en">Invoices</span>
+                </button>
+                <button class="tab-btn" data-tab="journals">
+                  <span lang="en">Journals</span>
+                </button>
+                <button class="tab-btn" data-tab="payments">
+                  <span lang="en">Payments</span>
+                </button>
+                <button class="tab-btn" data-tab="recon">
+                  <span lang="en">Reconciliation</span>
+                </button>
+                <button class="tab-btn" data-tab="taxes">
+                  <span lang="en">Taxes</span>
+                </button>
+                <button class="tab-btn" data-tab="reports">
+                  <span lang="en">Reports</span>
+                </button>
+              </div>
+
+              <div class="tab-panel active" data-panel="coa">
+                <h4>
+                  <span lang="en">Chart of Accounts (CoA)</span>
+                  <span class="tag"><span lang="en">Foundation</span></span>
+                </h4>
+                <p>
+                  القائمة المنظَّمة لجميع الحسابات التي تستخدمها الشركة لتسجيل
+                  المعاملات المالية — <span lang="en">assets</span>،
+                  <span lang="en">liabilities</span>،
+                  <span lang="en">equity</span>،
+                  <span lang="en">income</span>،
+                  <span lang="en">expenses</span>. يأتي
+                  <span lang="en">Odoo</span> بحزم محلية حسب البلد تُحمِّل
+                  <span lang="en">CoA</span> الصحيح مسبقًا.
+                </p>
+                <dl class="kv">
+                  <dt>الهدف</dt>
+                  <dd>توحيد طريقة تصنيف المعاملات.</dd>
+                  <dt>التخصيص</dt>
+                  <dd>
+                    يمكن إضافة الحسابات أو إعادة تسميتها أو تجميعها حسب احتياج
+                    الشركة.
+                  </dd>
+                  <dt>التوطين</dt>
+                  <dd>تُحمَّل تلقائيًا حسب بلد الشركة.</dd>
+                </dl>
+              </div>
+
+              <div class="tab-panel" data-panel="invoices">
+                <h4>
+                  <span lang="en">Invoices</span>
+                  <span class="tag"
+                    ><span lang="en">Customer &amp; Vendor</span></span
+                  >
+                </h4>
+                <p>
+                  <span lang="en">Invoices</span> هي مستندات قانونية تسجِّل
+                  المبالغ المستحقّة. يفصل <span lang="en">Odoo</span> بينها
+                  إلى <em><span lang="en">Customer Invoices</span></em>
+                  (تبيع، أموال داخلة) و
+                  <em><span lang="en">Vendor Bills</span></em>
+                  (تشتري، أموال خارجة).
+                </p>
+                <dl class="kv">
+                  <dt><span lang="en">Customer invoice</span></dt>
+                  <dd>
+                    تُنشَأ من <span lang="en">sales orders</span> أو يدويًا؛
+                    تُسجَّل في <span lang="en">receivables</span>.
+                  </dd>
+                  <dt><span lang="en">Vendor bill</span></dt>
+                  <dd>
+                    تُنشَأ من <span lang="en">purchase orders</span> أو تُرفَع
+                    يدويًا؛ تُسجَّل في <span lang="en">payables</span>.
+                  </dd>
+                  <dt><span lang="en">States</span></dt>
+                  <dd>
+                    <span lang="en">Draft → Posted → Paid</span>
+                    (أو <span lang="en">Cancelled</span>).
+                  </dd>
+                </dl>
+              </div>
+
+              <div class="tab-panel" data-panel="journals">
+                <h4>
+                  <span lang="en">Journals</span>
+                  <span class="tag"
+                    ><span lang="en">Books of entry</span></span
+                  >
+                </h4>
+                <p>
+                  الـ <span lang="en">journal</span> هو "دفتر" تُسجَّل فيه
+                  المعاملات. لكل <span lang="en">journal</span> نوع —
+                  <span lang="en">Sales</span>،
+                  <span lang="en">Purchase</span>،
+                  <span lang="en">Bank</span>، <span lang="en">Cash</span>، أو
+                  <span lang="en">Miscellaneous</span> — ويضمن أن تصل كل
+                  معاملة إلى الدفتر الصحيح.
+                </p>
+                <dl class="kv">
+                  <dt><span lang="en">Sales journal</span></dt>
+                  <dd>يحتوي <span lang="en">customer invoices</span>.</dd>
+                  <dt><span lang="en">Purchase journal</span></dt>
+                  <dd>يحتوي <span lang="en">vendor bills</span>.</dd>
+                  <dt><span lang="en">Bank/Cash journals</span></dt>
+                  <dd>تتعقّب المدفوعات وكشوف الحسابات.</dd>
+                </dl>
+              </div>
+
+              <div class="tab-panel" data-panel="payments">
+                <h4>
+                  <span lang="en">Payments</span>
+                  <span class="tag"
+                    ><span lang="en">Money movement</span></span
+                  >
+                </h4>
+                <p>
+                  <span lang="en">Payments</span> تمثّل أموالًا فعليّة
+                  مُستلَمة من العملاء أو مُرسَلة للموردين. يمكن تسجيلها مباشرة
+                  على فاتورة أو كقيود مستقلّة، ثم تُطابَق لاحقًا مع كشف الحساب
+                  البنكي.
+                </p>
+                <dl class="kv">
+                  <dt><span lang="en">Inbound</span></dt>
+                  <dd>العميل يدفع لك.</dd>
+                  <dt><span lang="en">Outbound</span></dt>
+                  <dd>أنت تدفع للمورد.</dd>
+                  <dt><span lang="en">Methods</span></dt>
+                  <dd>
+                    <span lang="en">Manual</span>،
+                    <span lang="en">batch</span>،
+                    <span lang="en">SEPA</span>،
+                    <span lang="en">check</span>،
+                    <span lang="en">wire</span>، إلخ.
+                  </dd>
+                </dl>
+              </div>
+
+              <div class="tab-panel" data-panel="recon">
+                <h4>
+                  <span lang="en">Reconciliation</span>
+                  <span class="tag"><span lang="en">Matching</span></span>
+                </h4>
+                <p>
+                  عملية مطابقة المدفوعات مع الفواتير وسطور كشف الحساب البنكي
+                  بحيث تعكس الدفاتر الواقع. أداة
+                  <span lang="en">Odoo</span> للـ
+                  <span lang="en">reconciliation</span> تقترح مطابقات تلقائية
+                  بناءً على المبلغ والشريك والمرجع.
+                </p>
+                <dl class="kv">
+                  <dt>الهدف</dt>
+                  <dd>
+                    وضع الفواتير في حالة <span lang="en">Paid</span> وتصفية
+                    سطور البنك.
+                  </dd>
+                  <dt><span lang="en">Auto-suggestions</span></dt>
+                  <dd>بناءً على المبلغ + الشريك + المرجع.</dd>
+                  <dt><span lang="en">Reconciliation models</span></dt>
+                  <dd>قواعد لمطابقة الأنماط المتكرّرة تلقائيًا.</dd>
+                </dl>
+              </div>
+
+              <div class="tab-panel" data-panel="taxes">
+                <h4>
+                  <span lang="en">Taxes</span>
+                  <span class="tag"><span lang="en">Compliance</span></span>
+                </h4>
+                <p>
+                  يتيح <span lang="en">Odoo</span> تعريف أي ضريبة (<span
+                    lang="en"
+                    >VAT</span
+                  >، <span lang="en">GST</span>،
+                  <span lang="en">sales tax</span>) وتطبيقها على الفواتير
+                  كمبلغ ثابت أو نسبة مئوية.
+                  <span lang="en">Fiscal positions</span> تحوّل الضرائب
+                  تلقائيًا حسب الشريك أو المنطقة.
+                </p>
+                <dl class="kv">
+                  <dt><span lang="en">Tax types</span></dt>
+                  <dd>
+                    <span lang="en">Sales (output)</span> و
+                    <span lang="en">Purchase (input)</span>.
+                  </dd>
+                  <dt><span lang="en">Calculation</span></dt>
+                  <dd>
+                    نسبة من السعر، ثابتة، أو
+                    <span lang="en">tax-on-tax</span>.
+                  </dd>
+                  <dt><span lang="en">Reports</span></dt>
+                  <dd>
+                    تقرير الضرائب يجمع <span lang="en">VAT</span> المحصَّل
+                    والمدفوع لتقديم الإقرار.
+                  </dd>
+                </dl>
+              </div>
+
+              <div class="tab-panel" data-panel="reports">
+                <h4>
+                  <span lang="en">Financial Reports</span>
+                  <span class="tag"
+                    ><span lang="en">Decision support</span></span
+                  >
+                </h4>
+                <p>
+                  تقارير مدمجة تتحدّث في الوقت الفعلي مع كل قيد جديد. أهم
+                  التقارير: <span lang="en">P&amp;L</span>،
+                  <span lang="en">Balance Sheet</span>،
+                  <span lang="en">General Ledger</span>،
+                  <span lang="en">Aged Receivables/Payables</span>، و
+                  <span lang="en">Tax Report</span>.
+                </p>
+                <dl class="kv">
+                  <dt><span lang="en">P&amp;L</span></dt>
+                  <dd>الإيرادات مقابل المصروفات على فترة زمنية.</dd>
+                  <dt><span lang="en">Balance Sheet</span></dt>
+                  <dd>
+                    صورة لحظيّة لـ <span lang="en">assets</span> و
+                    <span lang="en">liabilities</span> و
+                    <span lang="en">equity</span>.
+                  </dd>
+                  <dt><span lang="en">Aged reports</span></dt>
+                  <dd>تتبّع المتأخرات لدى العملاء/الموردين.</dd>
+                </dl>
+              </div>
+            </div>
+          </section>
+
+          <!-- =========== 4. WORKFLOW =========== -->
+          <section id="workflow">
+            <h2>
+              <span class="num">4</span>سير العمل المحاسبي الأساسي
+            </h2>
+            <p>
+              التدفّق اليومي الذي يراه معظم المستخدمين في
+              <span lang="en">Odoo</span>، من البداية إلى النهاية:
+            </p>
+
+            <div class="workflow">
+              <div class="step">
+                <div class="step-num">1</div>
+                <h4>إنشاء <span lang="en">Invoice</span></h4>
+                <p>
+                  أنشئ <span lang="en">customer invoice</span> من
+                  <span lang="en">sales order</span> أو يدويًا.
+                </p>
+              </div>
+              <div class="step">
+                <div class="step-num">2</div>
+                <h4>تأكيد ونشر</h4>
+                <p>
+                  أكِّد الفاتورة — يُنشئ <span lang="en">Odoo</span> قيد
+                  <span lang="en">journal</span> تلقائيًا.
+                </p>
+              </div>
+              <div class="step">
+                <div class="step-num">3</div>
+                <h4>تسجيل <span lang="en">Payment</span></h4>
+                <p>العميل يدفع؛ سجِّل الدفعة على الفاتورة.</p>
+              </div>
+              <div class="step">
+                <div class="step-num">4</div>
+                <h4><span lang="en">Bank Statement</span></h4>
+                <p>
+                  استورد التغذية البنكية أو زامِنها لجلب الحركات الفعلية.
+                </p>
+              </div>
+              <div class="step">
+                <div class="step-num">5</div>
+                <h4><span lang="en">Reconcile</span></h4>
+                <p>
+                  طابق الدفعة مع سطر البنك — الدفاتر الآن مغلقة لتلك
+                  المعاملة.
+                </p>
+              </div>
+            </div>
+
+            <div class="callout tip">
+              <strong>ملخّص شامل</strong>
+              تأكيد البيع → نشر <span lang="en">invoice</span> → تسجيل
+              <span lang="en">payment</span> → استيراد
+              <span lang="en">bank statement</span> →
+              <span lang="en">reconcile</span> السطور → تحديث التقارير في
+              الوقت الفعلي.
+            </div>
+          </section>
+
+          <!-- =========== 5. FUNCTIONAL FEATURES =========== -->
+          <section id="features">
+            <h2>
+              <span class="num">5</span>الميزات الوظيفية الأساسية
+            </h2>
+            <p>
+              إلى جانب الأساسيات، إليك الميزات التي يجب أن تستطيع تسميتها
+              وشرحها بإيجاز:
+            </p>
+
+            <div class="cards">
+              <div class="card">
+                <div class="card-icon">🏢</div>
+                <h4><span lang="en">Multi-Company</span></h4>
+                <p>
+                  أدِر عدّة كيانات قانونية في قاعدة بيانات
+                  <span lang="en">Odoo</span> واحدة، مع شركاء ومنتجات مشتركة
+                  وقواعد <span lang="en">inter-company</span>.
+                </p>
+              </div>
+              <div class="card alt">
+                <div class="card-icon">🤖</div>
+                <h4><span lang="en">Automation</span></h4>
+                <p>
+                  <span lang="en">Automated actions</span>،
+                  <span lang="en">scheduled actions</span>،
+                  <span lang="en">server actions</span>،
+                  <span lang="en">follow-ups</span>، فواتير متكرّرة، ومزامنة
+                  <span lang="en">bank-feed</span> تقلّل العمل اليدوي.
+                </p>
+              </div>
+              <div class="card">
+                <div class="card-icon">🌍</div>
+                <h4><span lang="en">Fiscal Positions</span></h4>
+                <p>
+                  تعديل تلقائي للضرائب والحسابات حسب بلد/منطقة العميل —
+                  أساسيّ للتجارة عبر الحدود.
+                </p>
+              </div>
+              <div class="card alt">
+                <div class="card-icon">📊</div>
+                <h4><span lang="en">Reporting Tools</span></h4>
+                <p>
+                  <span lang="en">Pivot views</span>،
+                  <span lang="en">Gantt</span>،
+                  <span lang="en">dashboards</span>، ومُنشئ تقارير مخصّص —
+                  معظم التقارير تتعمّق إلى المستند المصدر بنقرة واحدة.
+                </p>
+              </div>
+              <div class="card">
+                <div class="card-icon">💱</div>
+                <h4><span lang="en">Multi-Currency</span></h4>
+                <p>
+                  سجِّل المعاملات بأي عملة مع إعادة تقييم تلقائية لأسعار
+                  الصرف.
+                </p>
+              </div>
+              <div class="card alt">
+                <div class="card-icon">🔐</div>
+                <h4><span lang="en">Access Rights</span></h4>
+                <p>
+                  أدوار دقيقة، <span lang="en">record rules</span>، وتدفقات
+                  موافقة تحفظ أمان البيانات المالية.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- =========== 6. Q&A =========== -->
+          <section id="qa">
+            <h2>
+              <span class="num">6</span>أسئلة وأجوبة المقابلة
+            </h2>
+            <p>
+              اضغط على أي سؤال لإظهار إجابة مهنية قصيرة يمكنك تكييفها في
+              مقابلتك.
+            </p>
+
+            <div class="accordion">
+              <details open>
+                <summary>
+                  <span class="q-num">Q1</span>
+                  <span class="q-text">
+                    ما هو <span lang="en">Odoo</span> ولماذا يُعتبر
+                    <span lang="en">ERP</span>؟
+                  </span>
+                  <svg
+                    class="chev"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="answer">
+                  <span lang="en">Odoo</span> هو منظومة إدارة أعمال مفتوحة
+                  المصدر تجمع وحدات مثل <span lang="en">CRM</span>،
+                  <span lang="en">Sales</span>،
+                  <span lang="en">Inventory</span>،
+                  <span lang="en">Accounting</span>،
+                  <span lang="en">HR</span>، و
+                  <span lang="en">Manufacturing</span> على منصة واحدة.
+                  يُعتبر <span lang="en">ERP</span> لأنه يُكامل جميع وظائف
+                  الأعمال الأساسية حول قاعدة بيانات واحدة، ضامنًا اتساق
+                  البيانات في كامل المؤسسة.
+                </div>
+              </details>
+
+              <details>
+                <summary>
+                  <span class="q-num">Q2</span>
+                  <span class="q-text">
+                    ما الفرق بين <span lang="en">Odoo Community</span> و
+                    <span lang="en">Enterprise</span>؟
+                  </span>
+                  <svg
+                    class="chev"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="answer">
+                  <span lang="en">Community</span> هي النسخة المجانية مفتوحة
+                  المصدر مع الوحدات الأساسية. <span lang="en">Enterprise</span>
+                  هي النسخة المدفوعة التي تضيف ميزات متقدّمة (<span
+                    lang="en"
+                    >Studio</span
+                  >، <span lang="en">advanced accounting</span>،
+                  <span lang="en">IoT</span>، تطبيقات الجوال)، دعمًا رسميًا،
+                  استضافة على <span lang="en">Odoo.sh</span> أو
+                  <span lang="en">Odoo Online</span>، وخدمات ترقية كاملة.
+                </div>
+              </details>
+
+              <details>
+                <summary>
+                  <span class="q-num">Q3</span>
+                  <span class="q-text">
+                    اشرح المفهوم المعياري في <span lang="en">Odoo</span>.
+                  </span>
+                  <svg
+                    class="chev"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="answer">
+                  كل وظيفة تجارية تُسلَّم كوحدة (تطبيق) مستقلّة. تُثبَّت فقط
+                  ما تحتاج — مثل <span lang="en">Sales</span> و
+                  <span lang="en">Accounting</span> — ويمكنك لاحقًا إضافة
+                  <span lang="en">Inventory</span> أو
+                  <span lang="en">HR</span>. تتشارك الوحدات قاعدة بيانات
+                  واحدة، فتتدفّق البيانات بسلاسة بينها دون تكاملات.
+                </div>
+              </details>
+
+              <details>
+                <summary>
+                  <span class="q-num">Q4</span>
+                  <span class="q-text">
+                    ما هو <span lang="en">Chart of Accounts</span>؟
+                  </span>
+                  <svg
+                    class="chev"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="answer">
+                  هو القائمة المنظَّمة لجميع الحسابات (<span lang="en"
+                    >assets</span
+                  >، <span lang="en">liabilities</span>،
+                  <span lang="en">equity</span>،
+                  <span lang="en">income</span>،
+                  <span lang="en">expenses</span>) التي تستخدمها الشركة
+                  لتصنيف معاملاتها المالية. يحمّل
+                  <span lang="en">Odoo</span>
+                  <span lang="en">Chart of Accounts</span> خاصًا بكل بلد أثناء
+                  إعداد <span lang="en">Accounting</span> بناءً على حزمة
+                  التوطين.
+                </div>
+              </details>
+
+              <details>
+                <summary>
+                  <span class="q-num">Q5</span>
+                  <span class="q-text">
+                    ما هو <span lang="en">Journal</span> في
+                    <span lang="en">Odoo Accounting</span>؟
+                  </span>
+                  <svg
+                    class="chev"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="answer">
+                  الـ <span lang="en">journal</span> هو دفتر منطقي يُجمِّع
+                  المعاملات المالية من نفس النوع —
+                  <span lang="en">Sales</span>،
+                  <span lang="en">Purchase</span>،
+                  <span lang="en">Bank</span>، <span lang="en">Cash</span>، أو
+                  <span lang="en">Miscellaneous</span>. كل قيد منشور ينتمي
+                  إلى <span lang="en">journal</span>، يتحكّم في الترقيم
+                  والحسابات الافتراضية وحقوق الوصول.
+                </div>
+              </details>
+
+              <details>
+                <summary>
+                  <span class="q-num">Q6</span>
+                  <span class="q-text">
+                    اشرح دورة <span lang="en">invoice-to-payment</span>.
+                  </span>
+                  <svg
+                    class="chev"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="answer">
+                  أنشئ <span lang="en">customer invoice</span> (<span lang="en"
+                    >draft</span
+                  >) → أكّدها فينشر <span lang="en">Odoo</span> قيد
+                  <span lang="en">journal</span> → سجِّل
+                  <span lang="en">payment</span> العميل → استورد
+                  <span lang="en">bank statement</span> → طابق الدفعة مع سطر
+                  البنك. تنتقل الفاتورة تلقائيًا إلى
+                  <span lang="en">Paid</span> بمجرد المطابقة الكاملة.
+                </div>
+              </details>
+
+              <details>
+                <summary>
+                  <span class="q-num">Q7</span>
+                  <span class="q-text">
+                    ما هي <span lang="en">reconciliation</span> ولماذا هي
+                    مهمّة؟
+                  </span>
+                  <svg
+                    class="chev"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="answer">
+                  <span lang="en">Reconciliation</span> هي عملية مطابقة
+                  المعاملات بين الدفاتر والسجلات الخارجية
+                  (<span lang="en">bank statements</span>، الفواتير،
+                  المدفوعات). تضمن دقّة البيانات المالية، تضع الفواتير في
+                  حالة <span lang="en">paid</span>، وتصفّي سطور البنك لتعكس
+                  التقارير الواقع.
+                </div>
+              </details>
+
+              <details>
+                <summary>
+                  <span class="q-num">Q8</span>
+                  <span class="q-text">
+                    كيف تُكوَّن <span lang="en">taxes</span> في
+                    <span lang="en">Odoo</span>؟
+                  </span>
+                  <svg
+                    class="chev"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="answer">
+                  تُعرَّف الضرائب من
+                  <span lang="en">Accounting → Configuration → Taxes</span>.
+                  تحدّد النوع (<span lang="en">sales/purchase</span>)،
+                  طريقة الحساب (نسبة، ثابتة،
+                  <span lang="en">group</span>)، حسابات الضريبة، و
+                  <span lang="en">tax grids</span>. ثم تطبّقها
+                  <span lang="en">fiscal positions</span> تلقائيًا حسب موقع
+                  الشريك أو قواعد العمل.
+                </div>
+              </details>
+
+              <details>
+                <summary>
+                  <span class="q-num">Q9</span>
+                  <span class="q-text">
+                    ما هو <span lang="en">Fiscal Position</span>؟
+                  </span>
+                  <svg
+                    class="chev"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="answer">
+                  <span lang="en">Fiscal Position</span> هو مجموعة قواعد
+                  تعيين تستبدل تلقائيًا الضرائب والحسابات في معاملة بناءً على
+                  بلد العميل، وضع <span lang="en">VAT</span>، أو نوع العمل —
+                  مثلاً تحويل <span lang="en">VAT</span> المحلية إلى
+                  <span lang="en">intra-EU 0%</span> لعملاء
+                  <span lang="en">B2B</span> الأوروبيين.
+                </div>
+              </details>
+
+              <details>
+                <summary>
+                  <span class="q-num">Q10</span>
+                  <span class="q-text">
+                    اذكر التقارير المالية الرئيسية في
+                    <span lang="en">Odoo</span>.
+                  </span>
+                  <svg
+                    class="chev"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="answer">
+                  <span lang="en">Profit and Loss (Income Statement)</span>،
+                  <span lang="en">Balance Sheet</span>،
+                  <span lang="en">General Ledger</span>،
+                  <span lang="en">Trial Balance</span>،
+                  <span lang="en">Aged Receivables</span> و
+                  <span lang="en">Aged Payables</span>،
+                  <span lang="en">Cash Flow Statement</span>، و
+                  <span lang="en">Tax Report</span>. كلّها تُحدَّث في الوقت
+                  الفعلي وتتعمّق إلى قيد <span lang="en">journal</span>
+                  المصدر.
+                </div>
+              </details>
+
+              <details>
+                <summary>
+                  <span class="q-num">Q11</span>
+                  <span class="q-text">
+                    كيف يدعم <span lang="en">Odoo</span> بيئة
+                    <span lang="en">multi-company</span>؟
+                  </span>
+                  <svg
+                    class="chev"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="answer">
+                  يمكن لقاعدة بيانات <span lang="en">Odoo</span> واحدة
+                  استضافة عدّة شركات، لكلٍّ منها
+                  <span lang="en">Chart of Accounts</span>،
+                  <span lang="en">journals</span>،
+                  <span lang="en">taxes</span>، وعملات خاصة بها. يبدّل
+                  المستخدمون السياق عبر مُحدِّد الشركة، ويمكن لقواعد
+                  <span lang="en">inter-company</span> عكس معاملات
+                  <span lang="en">Sales/Purchase</span> تلقائيًا بين
+                  الكيانات.
+                </div>
+              </details>
+
+              <details>
+                <summary>
+                  <span class="q-num">Q12</span>
+                  <span class="q-text">
+                    ما الفرق بين <span lang="en">Customer Invoice</span> و
+                    <span lang="en">Vendor Bill</span>؟
+                  </span>
+                  <svg
+                    class="chev"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="answer">
+                  <span lang="en">Customer Invoice</span> هي ما ترسله إلى
+                  عملائك عند البيع — تزيد الإيرادات و
+                  <span lang="en">accounts receivable</span>.
+                  <span lang="en">Vendor Bill</span> هي ما يرسله الموردون لك
+                  مقابل المشتريات — تزيد <span lang="en">expense</span>
+                  (أو <span lang="en">asset</span>) و
+                  <span lang="en">accounts payable</span>.
+                </div>
+              </details>
+
+              <details>
+                <summary>
+                  <span class="q-num">Q13</span>
+                  <span class="q-text">
+                    ما ميزات <span lang="en">automation</span> التي يقدّمها
+                    <span lang="en">Odoo Accounting</span>؟
+                  </span>
+                  <svg
+                    class="chev"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="answer">
+                  <span lang="en">Recurring invoices</span>، مزامنة تلقائية
+                  لـ <span lang="en">bank-feed</span>، التقاط
+                  <span lang="en">vendor bills</span> بـ
+                  <span lang="en">OCR</span>، تذكيرات/<span lang="en"
+                    >follow-ups</span
+                  >
+                  دفع آلية، <span lang="en">reconciliation models</span>،
+                  <span lang="en">scheduled actions</span>، وتدفّقات
+                  الموافقة. تقلّل الإدخال اليدوي وتسرّع الإغلاق المالي.
+                </div>
+              </details>
+
+              <details>
+                <summary>
+                  <span class="q-num">Q14</span>
+                  <span class="q-text">
+                    كيف يتعامل <span lang="en">Odoo</span> مع المعاملات بعملات
+                    متعدّدة؟
+                  </span>
+                  <svg
+                    class="chev"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="answer">
+                  تفعّل <span lang="en">multi-currency</span> من الإعدادات،
+                  تختار العملات المطلوبة، ويجلب
+                  <span lang="en">Odoo</span> أسعار الصرف اليومية تلقائيًا.
+                  تُسجَّل المعاملات بالعملة الأجنبية مع كتابتها بعملة الشركة،
+                  مع قيود تلقائية للأرباح/الخسائر عند إعادة التقييم.
+                </div>
+              </details>
+
+              <details>
+                <summary>
+                  <span class="q-num">Q15</span>
+                  <span class="q-text">
+                    لماذا تختار شركةٌ <span lang="en">Odoo</span> بدلًا من
+                    <span lang="en">SAP</span> أو
+                    <span lang="en">Oracle</span>؟
+                  </span>
+                  <svg
+                    class="chev"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="answer">
+                  تكلفة ملكية أقل، تنفيذ أسرع، تخصيص أسهل عبر
+                  <span lang="en">Studio</span> و
+                  <span lang="en">Python</span>، واجهة حديثة، ونموذج تسعير
+                  معياري. <span lang="en">Odoo</span> جذّاب خاصة لـ
+                  <span lang="en">SMEs</span> وشركات السوق المتوسط التي تحتاج
+                  مرونة <span lang="en">ERP</span> دون رسوم ترخيص بمستوى
+                  المؤسسات.
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <footer class="footer">
+            <div>
+              مُعدّ للتحضير للمقابلة · نظرة عامة على
+              <span lang="en">Odoo ERP</span>
+            </div>
+            <div>توثيق حديث · ملف <span lang="en">HTML</span> واحد</div>
+          </footer>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      /* ============ Theme toggle ============ */
+      const themeBtn = document.getElementById("themeToggle");
+      const themeLabel = document.getElementById("themeLabel");
+      const root = document.body;
+      function setTheme(t) {
+        root.setAttribute("data-theme", t);
+        themeLabel.textContent = t === "dark" ? "الوضع الفاتح" : "الوضع الداكن";
+        try {
+          localStorage.setItem("odoo-docs-theme", t);
+        } catch (e) {}
+      }
+      try {
+        const saved = localStorage.getItem("odoo-docs-theme");
+        if (saved) setTheme(saved);
+      } catch (e) {}
+      themeBtn.addEventListener("click", () => {
+        const cur = root.getAttribute("data-theme");
+        setTheme(cur === "dark" ? "light" : "dark");
+      });
+
+      /* ============ Mobile menu ============ */
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("overlay");
+      const menuBtn = document.getElementById("menuToggle");
+      function openMenu() {
+        sidebar.classList.add("open");
+        overlay.classList.add("show");
+      }
+      function closeMenu() {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("show");
+      }
+      menuBtn.addEventListener("click", openMenu);
+      overlay.addEventListener("click", closeMenu);
+
+      /* ============ Tabs ============ */
+      const tabRoot = document.getElementById("accountingTabs");
+      tabRoot.querySelectorAll(".tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const target = btn.dataset.tab;
+          tabRoot
+            .querySelectorAll(".tab-btn")
+            .forEach((b) => b.classList.toggle("active", b === btn));
+          tabRoot
+            .querySelectorAll(".tab-panel")
+            .forEach((p) =>
+              p.classList.toggle("active", p.dataset.panel === target),
+            );
+          btn.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+        });
+      });
+
+      /* ============ Active section highlight ============ */
+      const links = document.querySelectorAll(".nav a");
+      const sections = Array.from(links)
+        .map((a) => document.querySelector(a.getAttribute("href")))
+        .filter(Boolean);
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = entry.target.id;
+              links.forEach((l) =>
+                l.classList.toggle(
+                  "active",
+                  l.getAttribute("href") === "#" + id,
+                ),
+              );
+            }
+          });
+        },
+        { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
+      );
+      sections.forEach((s) => observer.observe(s));
+
+      /* close mobile sidebar on nav click */
+      links.forEach((l) =>
+        l.addEventListener("click", () => {
+          if (window.innerWidth <= 920) closeMenu();
+        }),
+      );
+
+      /* ============ Search filter ============ */
+      const search = document.getElementById("navSearch");
+      search.addEventListener("input", (e) => {
+        const q = e.target.value.trim().toLowerCase();
+        links.forEach((l) => {
+          const txt = l.textContent.toLowerCase();
+          l.classList.toggle("hidden", q && !txt.includes(q));
+        });
+      });
+    </script>
+  </body>
+</html>
